@@ -1,9 +1,12 @@
-from Game import Game
-
+import pygame
+from constants import SCREEN 
+pygame.init()
+from MainMenu import MainMenu
 
 def main():
-    game = Game()
-    game.run()
+    menu = MainMenu(SCREEN)
+    menu.run()
+
 
 
 if __name__ == "__main__":

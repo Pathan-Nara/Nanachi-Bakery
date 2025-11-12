@@ -2,12 +2,9 @@ import pygame
 from Player import Player
 from Nanachi import Nanachi
 from Shop import Shop
+from constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
 pygame.init()
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-FONT = pygame.font.SysFont('arial', 30)
-SMALL_FONT = pygame.font.SysFont('arial', 20)
-SCREEN = pygame.display.set_mode((800, 600))    
+
 
 
 
@@ -23,11 +20,16 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+                pygame.quit()
+                exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.nanachi.is_clicked(event.pos):
                     self.player.add_nanachi(1)
+                elif 650 <= event.pos[0] <= 750 and 500 <= event.pos[1] <= 550:
+                    self.player.save_game()
                 else:
                     self.shop.handle_click(event.pos, self.player)
+
     
     def update(self):
         dt = self.clock.tick(60) / 1000.0
@@ -47,7 +49,10 @@ class Game:
         owned_text = SMALL_FONT.render(f"Bâtiments: {len(self.player.buildings)}", True, BLACK)
         SCREEN.blit(owned_text, (50, 130))
         self.shop.draw(self.player)
-        
+
+        save_text = SMALL_FONT.render("Save", True, BLACK)
+        SCREEN.blit(save_text, (650 + 10, 500 + 10))
+
         pygame.display.flip()
     
     def run(self):

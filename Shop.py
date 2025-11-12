@@ -1,13 +1,8 @@
 import pygame
 from BuildingList import BuildingList
-
+from constants import SCREEN, GREEN, GRAY, BLACK, SMALL_FONT
 pygame.init()
-SCREEN = pygame.display.set_mode((800, 600))
-GREEN = (0, 255, 0)
-GRAY = (200, 200, 200)
-BLACK = (0, 0, 0)
-SMALL_FONT = pygame.font.SysFont('arial', 20)
-FONT = pygame.font.SysFont('arial', 30)
+
 
 
 class Shop:

@@ -1,7 +1,7 @@
 import pygame
+from constants import SCREEN, BROWN
 pygame.init()
-SCREEN = pygame.display.set_mode((800, 600))
-BROWN = (150, 75, 0)
+
 
 class Nanachi:
     def __init__(self, x, y, radius):
