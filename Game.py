@@ -27,6 +27,10 @@ class Game:
                     self.player.add_nanachi(1)
                 elif 650 <= event.pos[0] <= 750 and 500 <= event.pos[1] <= 550:
                     self.player.save_game()
+                    self.running = False
+                    pygame.quit()
+                    exit()
+
                 else:
                     self.shop.handle_click(event.pos, self.player)
 
@@ -50,7 +54,7 @@ class Game:
         SCREEN.blit(owned_text, (50, 130))
         self.shop.draw(self.player)
 
-        save_text = SMALL_FONT.render("Save", True, BLACK)
+        save_text = SMALL_FONT.render("Save and Quit", True, BLACK)
         SCREEN.blit(save_text, (650 + 10, 500 + 10))
 
         pygame.display.flip()

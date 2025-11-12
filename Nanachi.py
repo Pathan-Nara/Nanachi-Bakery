@@ -10,8 +10,10 @@ class Nanachi:
         self.radius = radius
     
     def draw(self):
-        pygame.draw.circle(SCREEN, BROWN, (self.x, self.y), self.radius)
-    
+        nanachi = pygame.image.load("images/nanachi.png").convert_alpha()
+        nanachi = pygame.transform.scale(nanachi, (self.radius*2, self.radius*2))
+        SCREEN.blit(nanachi, (self.x - self.radius, self.y - self.radius))
+        
     def is_clicked(self, pos):
         dx = pos[0] - self.x
         dy = pos[1] - self.y
