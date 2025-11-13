@@ -20,6 +20,12 @@ class ListSaveMenu:
     def draw(self):
         self.screen.fill((0, 0, 0))
         y_offset = 100
+        if self.saves == []:
+            no_save_text = FONT.render("No saves found.", True, (255, 255, 255))
+            self.screen.blit(no_save_text, (300, 200))
+            quit_btn = Button("Quit", (400, 400), FONT)
+            quit_btn.draw(self.screen)
+            self.buttons.append(quit_btn)
         for save in self.saves:
             save_btn = Button(save, (400, y_offset), FONT)
             save_btn.draw(self.screen)
@@ -37,6 +43,11 @@ class ListSaveMenu:
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             y_offset = 100
+            if self.saves == []:
+                for btn in self.buttons:
+                    if btn.is_hovered(event.pos) and btn.text == "Quit":
+                        pygame.quit()
+                        exit()
             for save in self.saves:
                 for btn in self.buttons:
                     if btn.is_hovered(event.pos) and btn.text == save:
