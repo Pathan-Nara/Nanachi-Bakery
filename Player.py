@@ -6,6 +6,7 @@ class Player:
         self.nps = 0
         self.npc = 1
         self.buildings = []
+        self.upgrades = []
         self.name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     
     def add_nanachi(self, amount):
@@ -22,6 +23,15 @@ class Player:
                 self.buildings.append(building)
             self.nps += building.nps
             building.upgrade()
+            return True
+        return False
+    
+    def buy_upgrade(self, upgrade):
+        if self.can_afford(upgrade.cost):
+            self.nanachi -= upgrade.cost
+            if upgrade not in self.upgrades:
+                self.upgrades.append(upgrade)
+            upgrade.apply_upgrade(self)
             return True
         return False
     
