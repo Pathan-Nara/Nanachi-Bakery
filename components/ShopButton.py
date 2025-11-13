@@ -11,6 +11,7 @@ class ShopButton(Button):
         self.padding_x = padding_x
         self.padding_y = padding_y
         self.info_text = building_class.get_info()
+        self.info_text += f" | Level: {building_class.level}"
         self.text_surface = self.font.render(self.info_text, True, (0, 0, 0))
     
     def draw_shop_button(self, player):

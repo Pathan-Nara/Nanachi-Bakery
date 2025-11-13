@@ -31,32 +31,15 @@ class LoadSave:
     def update_player_buildings(self, buildings_data):
         for building_data in buildings_data:
             if isinstance(building_data, dict):
-                level = building_data.get('count', 0)
-                
-                if 'cost' in building_data and 'nps' in building_data:
-                    building = Building(
-                        name=building_data['name'],
-                        cost=building_data['cost'],
-                        nps=building_data['nps']
-                    )
-                    building.level = level
-                    building.cost = building_data['cost']
-                    building.nps = building_data['nps']
-                else:
-                    current_cost = building_data['cost']
-                    current_nps = building_data['nps']
-                    base_cost = int(current_cost / (2 ** level)) if level > 0 else current_cost
-                    base_nps = current_nps / (1.15 ** level) if level > 0 else current_nps
-                    
-                    building = Building(
-                        name=building_data['name'],
-                        cost=base_cost,
-                        nps=base_nps
-                    )
-                    building.level = level
-                    building.cost = current_cost
-                    building.nps = current_nps
-                    
+                building = Building(
+                    name=building_data['name'],
+                    cost=building_data['base_cost'],   
+                    nps=building_data['base_nps']
+                )
+                building.level = building_data.get('level', 0)
+                building.update_cost()  
+                building.update_nps()   
+            
                 self.player.buildings.append(building)
             elif isinstance(building_data, Building):
                 self.player.buildings.append(building_data)
