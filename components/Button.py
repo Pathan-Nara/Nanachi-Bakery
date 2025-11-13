@@ -20,6 +20,9 @@ class Button:
     def set_color(self, color):
         self.bg_color = color
 
+    def set_position(self, pos):
+        self.rect.center = pos
+
     def get_color(self):
         return self.bg_color
     
