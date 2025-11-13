@@ -2,6 +2,8 @@ from buildings.Casino import Casino
 from buildings.JorysHouse import JorysHouse
 from buildings.Mine import Mine
 from buildings.RastaStreet import RastaStreet
+from buildings.PoissonAJorys import PoissonAJorys
+from buildings.ChienAgrejon import ChienAgrejon
 
 
 class BuildingList:
@@ -10,7 +12,9 @@ class BuildingList:
             Casino(),
             JorysHouse(),
             Mine(),
-            RastaStreet()
+            RastaStreet(),
+            PoissonAJorys(),
+            ChienAgrejon()
         ]
 
     def get_buildings(self):
