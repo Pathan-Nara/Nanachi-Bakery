@@ -34,7 +34,6 @@ class Shop:
 
     def calculate_building_item_dimensions(self, items_list, player):
         display_items = [self.get_player_building(item, player) for item in items_list]
-        display_items = [self.get_player_building(item, player) for item in items_list]
         infos = [item.get_info() for item in display_items]
         sizes = [SMALL_FONT.size(txt) for txt in infos]
         max_text_w = max((w for w, h in sizes), default=0)
