@@ -31,7 +31,7 @@ class Player:
             self.nanachi -= upgrade.cost
             if upgrade not in self.upgrades:
                 self.upgrades.append(upgrade)
-            upgrade.apply_upgrade(self)
+            upgrade.upgrade(self)
             return True
         return False
     
@@ -40,5 +40,5 @@ class Player:
 
     def save_game(self):
         saver = Save(f"save_{self.name}.sav")
-        saver.save_game(self, self.buildings)
+        saver.save_game(self, self.buildings, self.upgrades)
 

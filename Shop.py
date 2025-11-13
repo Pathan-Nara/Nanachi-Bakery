@@ -3,7 +3,7 @@ from components.BuildingList import BuildingList
 from components.constants import SCREEN, GREEN, GRAY, BLACK, SMALL_FONT
 from components.ShopButton import ShopButton
 from components.UpgradeList import UpgradeList
-import random
+from components.UpgradeButton import UpgradeButton
 
 pygame.init()
 
@@ -32,9 +32,17 @@ class Shop:
 
 
 
-    def calculate_item_dimensions(self, items_list, player):
+    def calculate_building_item_dimensions(self, items_list, player):
         display_items = [self.get_player_building(item, player) for item in items_list]
-        infos = [item.get_info() + f" | Level: {item.level}" for item in display_items]
+        infos = [item.get_info() for item in display_items]
+        sizes = [SMALL_FONT.size(txt) for txt in infos]
+        max_text_w = max((w for w, h in sizes), default=0)
+        item_heights = [h + self.padding_y * 2 for w, h in sizes]
+        return display_items, infos, sizes, max_text_w, item_heights
+    
+    def calculate_upgrade_item_dimensions(self, items_list, player):
+        display_items = [self.get_player_upgrade(item, player) for item in items_list]
+        infos = [item.get_info() for item in display_items]
         sizes = [SMALL_FONT.size(txt) for txt in infos]
         max_text_w = max((w for w, h in sizes), default=0)
         item_heights = [h + self.padding_y * 2 for w, h in sizes]
@@ -78,9 +86,8 @@ class Shop:
     
 
 
-    def create_and_draw_buttons(self, display_items, item_heights, inner_x, box_width, player):
-        y_offset = self.y
-        self.buttons = []
+    def create_and_draw_shop_buttons(self, display_items, item_heights, inner_x, start_y, box_width, player):
+        y_offset = start_y
         spacing = 10
     
         for i, item in enumerate(display_items):
@@ -90,16 +97,28 @@ class Shop:
             btn.draw_shop_button(player)
             self.buttons.append(btn)
             y_offset += h + spacing
+
+    def create_and_draw_upgrade_buttons(self, display_items, item_heights, inner_x, start_y, box_width, player):
+        y_offset = start_y
+        spacing = 10
+    
+        for i, item in enumerate(display_items):
+            h = item_heights[i]
+            rect = pygame.Rect(inner_x, y_offset, box_width, h)
+            btn = UpgradeButton(item, rect, SMALL_FONT, self.padding_x, self.padding_y)
+            btn.draw_shop_button(player)
+            self.buttons.append(btn)
+            y_offset += h + spacing
             
 
 
-    def draw(self, player):
+    def draw_building_shop(self, player):
         self.padding_x = 10
         self.padding_y = 8
-        self.title = "Shop"
+        self.title = "Buildings"
         title_height = 30
         display_items, infos, sizes, max_text_w, item_heights = \
-            self.calculate_item_dimensions(self.buildings_types, player)
+            self.calculate_building_item_dimensions(self.buildings_types, player)
         n = len(self.buildings_types)
         box_width, outer_width, outer_height, content_height = \
             self.calculate_box_dimensions(max_text_w, item_heights, n, title_height)
@@ -107,12 +126,34 @@ class Shop:
         outer_y = self.y - title_height - self.padding_x
         outer_x, outer_y = self.adjust_position_to_screen(outer_x, outer_y, outer_width)
         outer_rect = pygame.Rect(outer_x, outer_y, outer_width, outer_height)
-
         inner_x = self.draw_shop_container(outer_rect, box_width, title_height)
-        self.create_and_draw_buttons(display_items, item_heights, inner_x, box_width, player)
+        self.create_and_draw_shop_buttons(display_items, item_heights, inner_x, self.y, box_width, player)
+        buildings_shop_height = outer_height
+        self.draw_upgrade_shop(player, buildings_shop_height)
 
 
 
+    def draw_upgrade_shop(self, player, offset_y):
+        self.padding_x = 10
+        self.padding_y = 8
+        self.title = "Upgrades"
+        title_height = 30
+        spacing_between_shops = 15
+        display_items, infos, sizes, max_text_w, item_heights = \
+            self.calculate_upgrade_item_dimensions(self.upgrades_types, player)
+        n = len(self.upgrades_types)
+        box_width, outer_width, outer_height, content_height = \
+            self.calculate_box_dimensions(max_text_w, item_heights, n, title_height)
+        outer_x = self.x - self.padding_x
+        outer_y = self.y - title_height - self.padding_x + offset_y + spacing_between_shops
+        outer_x, outer_y = self.adjust_position_to_screen(outer_x, outer_y, outer_width)
+        outer_rect = pygame.Rect(outer_x, outer_y, outer_width, outer_height)
+        inner_x = self.draw_shop_container(outer_rect, box_width, title_height)
+        start_y = outer_y + title_height + self.padding_x
+        self.create_and_draw_upgrade_buttons(display_items, item_heights, inner_x, start_y, box_width, player)
+
+    def draw(self, player):
+        self.draw_building_shop(player)
 
     def handle_click(self, pos, player):
         for btn in self.buttons:

@@ -5,20 +5,26 @@ from Nanachi import Nanachi
 from Shop import Shop
 from Game import Game
 from Building import Building
+from Upgrades import Upgrades
+from components.constants import SCREEN
 
 class LoadSave:
 
     def __init__(self, data):
         self.data = data
         self.player = Player()
-        self.nanachi = Nanachi(200, 300, 80)
-        self.shop = Shop(500, 50)
+        self.nanachi = Nanachi(SCREEN.get_width() // 4, SCREEN.get_height() // 2, 80)
+        self.shop = Shop(SCREEN.get_width() - 20, 50)
+        
 
     def load_game(self):
         self.player.nanachi = self.data['nanachi']
         self.player.nps = self.data['nps']
+        self.player.npc = self.data['npc']
         buildings_data = self.data['buildings']
+        upgrades_data = self.data['upgrades']
         self.update_player_buildings(buildings_data)
+        self.update_player_upgrades(upgrades_data)
         name = self.data['name']
         game = Game()
         game.player = self.player
@@ -43,6 +49,26 @@ class LoadSave:
                 self.player.buildings.append(building)
             elif isinstance(building_data, Building):
                 self.player.buildings.append(building_data)
+
+
+
+
+    def update_player_upgrades(self, upgrades_data):
+        for upgrade_data in upgrades_data:
+            if isinstance(upgrade_data, dict):
+                upgrade = Upgrades(
+                    name=upgrade_data['name'],
+                    cost=upgrade_data['base_cost'],
+                )
+                upgrade.level = upgrade_data.get('level', 0)
+                upgrade.update_cost()     
+            
+                self.player.upgrades.append(upgrade)
+                print(self.player.upgrades)
+            elif isinstance(upgrade_data, Upgrades):
+                self.player.upgrades.append(upgrade_data)
+
+
 
     def deleteSave(self, filename):
         filepath = os.path.join("saves", filename)

@@ -8,7 +8,7 @@ class Building:
         self.level = 0
     
     def get_info(self):
-        return f"{self.name} {self.cost}n - {self.nps:.1f} nps"
+        return f"{self.name} {self.cost}n - {self.nps:.1f} nps - Level {self.level}"
     
     def update_cost(self):
         self.cost = int(self.base_cost * (2 ** self.level))

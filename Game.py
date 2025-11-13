@@ -60,8 +60,15 @@ class Game:
         nps_text = SMALL_FONT.render(f"NPS: {self.player.nps:.1f}", True, BLACK)
         SCREEN.blit(nps_text, (50, 100))
 
-        owned_text = SMALL_FONT.render(f"Bâtiments: {len(self.player.buildings)}", True, BLACK)
-        SCREEN.blit(owned_text, (50, 130))
+        npc_text = SMALL_FONT.render(f"NPC: {self.player.npc}", True, BLACK)
+        SCREEN.blit(npc_text, (50, 130))
+
+        building_text = SMALL_FONT.render(f"Bâtiments: {len(self.player.buildings)}", True, BLACK)
+        SCREEN.blit(building_text, (50, 160))
+
+        upgrade_text = SMALL_FONT.render(f"Upgrades: {len(self.player.upgrades)}", True, BLACK)
+        SCREEN.blit(upgrade_text, (50, 190))
+
         self.shop.draw(self.player)
 
         save_btn = Button("Save and Quit", (SCREEN.get_width() - 100, SCREEN.get_height() - 50), FONT, BLACK)
