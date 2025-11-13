@@ -1,11 +1,12 @@
 import pygame
 
 class Button:
-    def __init__(self, text, pos, font, text_color=(255, 255, 255), bg_color=None):
+    def __init__(self, text, pos, font, text_color=(255, 255, 255), bg_color=None, border_radius=0):
         self.text = text
         self.font = font
         self.text_color = text_color
         self.bg_color = bg_color
+        self.border_radius = border_radius
         self.text_surface = self.font.render(text, True, text_color)
         self.rect = self.text_surface.get_rect(center=pos)
         
@@ -13,9 +14,12 @@ class Button:
         if self.bg_color:
             padding = 10
             bg_rect = self.rect.inflate(padding * 2, padding * 2)
-            pygame.draw.rect(screen, self.bg_color, bg_rect)
-            pygame.draw.rect(screen, (0, 0, 0), bg_rect, 2)
-        screen.blit(self.text_surface, self.rect)
+            pygame.draw.rect(screen, self.bg_color, bg_rect, border_radius=self.border_radius)
+            pygame.draw.rect(screen, (0, 0, 0), bg_rect, 2, border_radius=self.border_radius)
+            text_rect = self.text_surface.get_rect(center=bg_rect.center)
+            screen.blit(self.text_surface, text_rect)
+        else:
+            screen.blit(self.text_surface, self.rect)
 
     def set_color(self, color):
         self.bg_color = color

@@ -6,6 +6,3 @@ class JorysHand(Upgrades):
 
     def apply_effect(self, player):
         player.npc += self.level * 2
-
-    
-    
