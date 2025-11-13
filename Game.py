@@ -2,6 +2,7 @@ import pygame
 from Player import Player
 from Nanachi import Nanachi
 from Shop import Shop
+from components.Button import Button
 import random
 from components.constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
 pygame.init()
@@ -12,10 +13,11 @@ pygame.init()
 class Game:
     def __init__(self):
         self.player = Player()
-        self.nanachi = Nanachi(200, 300, 80)
-        self.shop = Shop(500, 50)
+        self.nanachi = Nanachi(SCREEN.get_width() // 4, SCREEN.get_height() // 2, 80)
+        self.shop = Shop(SCREEN.get_width() - 20, 50)
         self.clock = pygame.time.Clock()
         self.running = True
+        self.buttons = []
     
     def handle_events(self):
         for event in pygame.event.get():
@@ -23,16 +25,22 @@ class Game:
                 self.running = False
                 pygame.quit()
                 exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.nanachi.is_clicked(event.pos):
-                    self.player.add_nanachi(1)
-                    self.nanachi.randomize_image()
-                    self.nanachi.randomize_position()
-                elif 650 <= event.pos[0] <= 750 and 500 <= event.pos[1] <= 550:
-                    self.player.save_game()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
                     self.running = False
                     pygame.quit()
                     exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.nanachi.is_clicked(event.pos):
+                    self.player.add_nanachi(self.player.npc)
+                    self.nanachi.randomize_image()
+                    self.nanachi.randomize_position()
+                for btn in self.buttons:
+                    if btn.is_hovered(event.pos) and btn.text == "Save and Quit":
+                        self.player.save_game()
+                        self.running = False
+                        pygame.quit()
+                        exit()
 
                 else:
                     self.shop.handle_click(event.pos, self.player)
@@ -56,8 +64,9 @@ class Game:
         SCREEN.blit(owned_text, (50, 130))
         self.shop.draw(self.player)
 
-        save_text = SMALL_FONT.render("Save and Quit", True, BLACK)
-        SCREEN.blit(save_text, (650 + 10, 500 + 10))
+        save_btn = Button("Save and Quit", (SCREEN.get_width() - 100, SCREEN.get_height() - 50), FONT, BLACK)
+        save_btn.draw(SCREEN)
+        self.buttons.append(save_btn)
 
         self.nanachi.draw()
 
