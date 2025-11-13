@@ -15,7 +15,6 @@ class BuildingList:
             Mine(),
             RastaStreet(),
             PoissonAJorys(),
-            
         ]
 
     def get_buildings(self):

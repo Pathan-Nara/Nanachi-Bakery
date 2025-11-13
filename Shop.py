@@ -15,14 +15,21 @@ class Shop:
         self.buildings_types = BuildingList().get_buildings()
         self.buttons = []
 
+    def get_player_building(self, building_type, player):
+        for player_building in player.buildings:
+            if player_building.name == building_type.name:
+                return player_building
+        return building_type
+
     def draw(self, player):
         n = len(self.buildings_types)
         padding_x = 10
         padding_y = 8
         spacing = 10
         title_height = 30
+        display_buildings = [self.get_player_building(b, player) for b in self.buildings_types]
         
-        infos = [b.get_info() for b in self.buildings_types]
+        infos = [b.get_info() for b in display_buildings]
         sizes = [SMALL_FONT.size(txt) for txt in infos]
         max_text_w = max((w for w, h in sizes), default=0)
         item_heights = [h + padding_y * 2 for w, h in sizes]
@@ -53,10 +60,10 @@ class Shop:
         y_offset = self.y
         self.buttons = []
         
-        for i, Building in enumerate(self.buildings_types):
+        for i, building in enumerate(display_buildings):
             h = item_heights[i]
             rect = pygame.Rect(inner_x, y_offset, box_width, h)
-            btn = ShopButton(Building, rect, SMALL_FONT, padding_x, padding_y)
+            btn = ShopButton(building, rect, SMALL_FONT, padding_x, padding_y)
             btn.draw_shop_button(player)
             self.buttons.append(btn)
             y_offset += h + spacing

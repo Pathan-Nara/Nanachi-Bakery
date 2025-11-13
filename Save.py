@@ -15,7 +15,7 @@ class Save:
                     'name': building.name,
                     'cost': building.cost,
                     'nps': building.nps,
-                    'count': building.count if hasattr(building, 'count') else 1
+                    'level': building.level if hasattr(building, 'level') else 1
                 }
                 buildings_data.append(building_dict)
             
