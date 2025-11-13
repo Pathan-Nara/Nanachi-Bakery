@@ -5,6 +5,7 @@ class JorysHand(Upgrades):
         super().__init__("Jory's Hand", 100)
 
     def apply_effect(self, player):
+        print("Applying Jory's Hand effect")
         player.npc += self.level * 2
 
     

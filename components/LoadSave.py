@@ -4,8 +4,8 @@ from core_class.Player import Player
 from core_class.Nanachi import Nanachi
 from core_class.Shop import Shop
 from menus.GameMenu import Game
-from core_class.Building import Building
-from core_class.Upgrades import Upgrades
+from components.BuildingList import BuildingList
+from components.UpgradeList import UpgradeList
 from components.constants import SCREEN
 
 class LoadSave:
@@ -35,39 +35,34 @@ class LoadSave:
 
 
     def update_player_buildings(self, buildings_data):
+        available_buildings = BuildingList().get_buildings()
+    
         for building_data in buildings_data:
             if isinstance(building_data, dict):
-                building = Building(
-                    name=building_data['name'],
-                    cost=building_data['base_cost'],   
-                    nps=building_data['base_nps']
-                )
-                building.level = building_data.get('level', 0)
-                building.update_cost()  
-                building.update_nps()   
-            
-                self.player.buildings.append(building)
-            elif isinstance(building_data, Building):
-                self.player.buildings.append(building_data)
+                for available_building in available_buildings:
+                    if available_building.name == building_data['name']:
+                        available_building.level = building_data.get('level', 0)
+                        available_building.base_cost = building_data['base_cost']
+                        available_building.base_nps = building_data['base_nps']
+                        available_building.update_cost()
+                        available_building.update_nps()
+                        self.player.buildings.append(available_building)
+                        break
 
 
 
 
     def update_player_upgrades(self, upgrades_data):
+        available_upgrades = UpgradeList().get_upgrades()
         for upgrade_data in upgrades_data:
             if isinstance(upgrade_data, dict):
-                upgrade = Upgrades(
-                    name=upgrade_data['name'],
-                    cost=upgrade_data['base_cost'],
-                )
-                upgrade.level = upgrade_data.get('level', 0)
-                upgrade.update_cost()     
-            
-                self.player.upgrades.append(upgrade)
-            elif isinstance(upgrade_data, Upgrades):
-                self.player.upgrades.append(upgrade_data)
-
-
+                for available_upgrade in available_upgrades:
+                    if available_upgrade.name == upgrade_data['name']:
+                        available_upgrade.level = upgrade_data.get('level', 0)
+                        available_upgrade.base_cost = upgrade_data['base_cost']
+                        available_upgrade.update_cost()
+                        self.player.upgrades.append(available_upgrade)
+                        break
 
     def deleteSave(self, filename):
         filepath = os.path.join("saves", filename)
