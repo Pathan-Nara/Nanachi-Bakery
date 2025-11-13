@@ -56,7 +56,7 @@ class Shop:
             pygame.draw.rect(SCREEN, BLACK, rect, 2)
 
             text_surface = SMALL_FONT.render(infos[i], True, BLACK)
-            SCREEN.blit(text_surface, (inner_x + padding_x - padding_x, y_offset + padding_y))
+            SCREEN.blit(text_surface, (inner_x + padding_x - padding_x +10, y_offset + padding_y))
 
             self.item_rects.append((rect, Building))
             y_offset += h + spacing
