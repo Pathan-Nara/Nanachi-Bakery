@@ -1,5 +1,6 @@
 import pygame
 from components.Button import Button
+import random
 
 
 class ShopButton(Button):    
@@ -18,8 +19,6 @@ class ShopButton(Button):
         pygame.draw.rect(screen, black_color, self.rect, 2)
         screen.blit(self.text_surface, (self.rect.x + self.padding_x, self.rect.y + self.padding_y))
     
-    def is_clicked(self, pos):
-        return self.rect.collidepoint(pos)
-    
     def buy(self, player):
         return player.buy_building(self.building_class)
+    

@@ -62,6 +62,6 @@ class Shop:
 
     def handle_click(self, pos, player):
         for btn in self.buttons:
-            if btn.is_clicked(pos):
+            if btn.is_hovered(pos):
                 return btn.buy(player)
         return False

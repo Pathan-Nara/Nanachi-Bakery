@@ -17,7 +17,7 @@ class Button:
             pygame.draw.rect(screen, (0, 0, 0), bg_rect, 2)
         screen.blit(self.text_surface, self.rect)
     
-    def is_clicked(self, pos):
+    def is_hovered(self, pos):
         return self.rect.collidepoint(pos)
     
     def update_text(self, new_text):

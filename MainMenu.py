@@ -23,13 +23,13 @@ class MainMenu:
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.start_btn.is_clicked(event.pos):
+            if self.start_btn.is_hovered(event.pos):
                 game = Game()
                 game.run()
-            elif self.save_btn.is_clicked(event.pos):
+            elif self.save_btn.is_hovered(event.pos):
                 list_save_menu = ListSaveMenu(self.screen)
                 list_save_menu.run()
-            elif self.quit_btn.is_clicked(event.pos):
+            elif self.quit_btn.is_hovered(event.pos):
                 pygame.quit()
                 exit()
 
