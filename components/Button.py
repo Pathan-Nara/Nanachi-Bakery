@@ -16,6 +16,16 @@ class Button:
             pygame.draw.rect(screen, self.bg_color, bg_rect)
             pygame.draw.rect(screen, (0, 0, 0), bg_rect, 2)
         screen.blit(self.text_surface, self.rect)
+
+    def set_color(self, color):
+        self.bg_color = color
+
+    def get_color(self):
+        return self.bg_color
+    
+    def font_color(self, color):
+        self.text_color = color
+        self.text_surface = self.font.render(self.text, True, color)
     
     def is_hovered(self, pos):
         return self.rect.collidepoint(pos)

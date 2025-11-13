@@ -2,6 +2,7 @@ import pygame
 from components.BuildingList import BuildingList
 from components.constants import SCREEN, GREEN, GRAY, BLACK, SMALL_FONT
 from components.ShopButton import ShopButton
+import random
 
 pygame.init()
 
@@ -56,9 +57,10 @@ class Shop:
             h = item_heights[i]
             rect = pygame.Rect(inner_x, y_offset, box_width, h)
             btn = ShopButton(Building, rect, SMALL_FONT, padding_x, padding_y)
-            btn.draw(SCREEN, player, GREEN, GRAY, BLACK)
+            btn.draw_shop_button(player)
             self.buttons.append(btn)
             y_offset += h + spacing
+
 
     def handle_click(self, pos, player):
         for btn in self.buttons:
