@@ -52,8 +52,7 @@ class Game:
         self.player.update(dt)
     
     def draw(self):
-        # SCREEN.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
-        SCREEN.fill(WHITE)
+        SCREEN.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         
         nanachi_text = FONT.render(f"Nanachi: {int(self.player.nanachi)}", True, BLACK)
         SCREEN.blit(nanachi_text, (50, 50))
