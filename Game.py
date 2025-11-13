@@ -2,6 +2,7 @@ import pygame
 from Player import Player
 from Nanachi import Nanachi
 from Shop import Shop
+import random
 from components.constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
 pygame.init()
 
@@ -25,6 +26,8 @@ class Game:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.nanachi.is_clicked(event.pos):
                     self.player.add_nanachi(1)
+                    self.nanachi.randomize_image()
+                    self.nanachi.randomize_position()
                 elif 650 <= event.pos[0] <= 750 and 500 <= event.pos[1] <= 550:
                     self.player.save_game()
                     self.running = False
@@ -41,10 +44,8 @@ class Game:
         self.player.update(dt)
     
     def draw(self):
-        SCREEN.fill(WHITE)
-
-        self.nanachi.draw()
-
+        SCREEN.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+        
         nanachi_text = FONT.render(f"Nanachi: {int(self.player.nanachi)}", True, BLACK)
         SCREEN.blit(nanachi_text, (50, 50))
 
@@ -57,6 +58,8 @@ class Game:
 
         save_text = SMALL_FONT.render("Save and Quit", True, BLACK)
         SCREEN.blit(save_text, (650 + 10, 500 + 10))
+
+        self.nanachi.draw()
 
         pygame.display.flip()
     
