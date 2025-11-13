@@ -9,12 +9,13 @@ from buildings.ChienAgrejon import ChienAgrejon
 class BuildingList:
     def __init__(self):
         self.buildings = [
+            ChienAgrejon(),
             Casino(),
             JorysHouse(),
             Mine(),
             RastaStreet(),
             PoissonAJorys(),
-            ChienAgrejon()
+            
         ]
 
     def get_buildings(self):
