@@ -33,6 +33,7 @@ class Game:
 
                 else:
                     self.shop.handle_click(event.pos, self.player)
+            
 
     
     def update(self):

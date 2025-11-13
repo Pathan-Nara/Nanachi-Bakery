@@ -13,12 +13,20 @@ class ShopButton(Button):
         self.info_text = building_class.get_info()
         self.text_surface = self.font.render(self.info_text, True, (0, 0, 0))
     
-    def draw(self, screen, player, green_color, gray_color, black_color):
-        color = green_color if player.can_afford(self.building_class.cost) else gray_color
-        pygame.draw.rect(screen, color, self.rect)
-        pygame.draw.rect(screen, black_color, self.rect, 2)
-        screen.blit(self.text_surface, (self.rect.x + self.padding_x, self.rect.y + self.padding_y))
+    def draw_shop_button(self, player):
+        if player.can_afford(self.building_class.cost):
+            if self.is_hovered(pygame.mouse.get_pos()):
+                self.randomColor()
+            else:
+                self.set_color((0, 255, 0))
+        else:
+            self.set_color((128, 128, 128))
+        self.draw(pygame.display.get_surface())
     
     def buy(self, player):
         return player.buy_building(self.building_class)
+    
+    def randomColor(self):
+        self.bg_color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        self.draw(pygame.display.get_surface())
     
