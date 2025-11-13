@@ -4,12 +4,13 @@ import random
 
 
 class UpgradeButton(Button):    
-    def __init__(self, upgrade_class, rect, font, padding_x=10, padding_y=8):
+    def __init__(self, upgrade_class, rect, font, padding_x=10, padding_y=8, border_radius=0):
         self.upgrade_class = upgrade_class
         self.rect = rect
         self.font = font
         self.padding_x = padding_x
         self.padding_y = padding_y
+        self.border_radius = border_radius
         self.info_text = upgrade_class.get_info()
         self.text_surface = self.font.render(self.info_text, True, (0, 0, 0))
     
