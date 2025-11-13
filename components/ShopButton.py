@@ -17,6 +17,8 @@ class ShopButton(Button):
         if player.can_afford(self.building_class.cost):
             if self.is_hovered(pygame.mouse.get_pos()):
                 self.randomColor()
+                self.random_position()
+                
             else:
                 self.set_color((0, 255, 0))
         else:
@@ -29,4 +31,6 @@ class ShopButton(Button):
     def randomColor(self):
         self.bg_color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
         self.draw(pygame.display.get_surface())
-    
+
+    def random_position(self):
+        self.rect = self.rect.move(random.randint(-20, 20), random.randint(-20, 20))
