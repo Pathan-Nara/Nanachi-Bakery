@@ -1,7 +1,7 @@
 import pygame
 from components.constants import SCREEN 
 pygame.init()
-from menues.MainMenu import MainMenu
+from menus.MainMenu import MainMenu
 
 def main():
     menu = MainMenu(SCREEN)

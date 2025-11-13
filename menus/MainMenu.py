@@ -1,7 +1,7 @@
 import pygame
-from menues.GameMenu import Game
+from menus.GameMenu import Game
 from components.constants import FONT
-from menues.ListSaveMenu import ListSaveMenu
+from menus.ListSaveMenu import ListSaveMenu
 from components.Button import Button
 
 pygame.init()

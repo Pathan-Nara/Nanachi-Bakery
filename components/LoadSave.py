@@ -3,7 +3,7 @@ import json
 from core_class.Player import Player
 from core_class.Nanachi import Nanachi
 from core_class.Shop import Shop
-from menues.GameMenu import Game
+from menus.GameMenu import Game
 from core_class.Building import Building
 from core_class.Upgrades import Upgrades
 from components.constants import SCREEN
@@ -64,7 +64,6 @@ class LoadSave:
                 upgrade.update_cost()     
             
                 self.player.upgrades.append(upgrade)
-                print(self.player.upgrades)
             elif isinstance(upgrade_data, Upgrades):
                 self.player.upgrades.append(upgrade_data)
 
