@@ -1,4 +1,4 @@
-from Building import Building
+from core_class.Building import Building
 
 class JorysHouse(Building):
     def __init__(self):

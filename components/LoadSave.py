@@ -1,11 +1,11 @@
 import os
 import json
-from Player import Player
-from Nanachi import Nanachi
-from Shop import Shop
-from Game import Game
-from Building import Building
-from Upgrades import Upgrades
+from core_class.Player import Player
+from core_class.Nanachi import Nanachi
+from core_class.Shop import Shop
+from menues.GameMenu import Game
+from core_class.Building import Building
+from core_class.Upgrades import Upgrades
 from components.constants import SCREEN
 
 class LoadSave:
