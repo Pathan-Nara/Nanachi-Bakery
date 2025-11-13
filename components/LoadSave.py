@@ -1,8 +1,10 @@
 import os
+import json
 from Player import Player
 from Nanachi import Nanachi
 from Shop import Shop
 from Game import Game
+from Building import Building
 
 class LoadSave:
 
@@ -13,13 +15,23 @@ class LoadSave:
         self.shop = Shop(500, 50)
 
     def load_game(self):
-        print(self.data)
         self.player.nanachi = self.data['nanachi']
         self.player.nps = self.data['nps']
-        buildings = self.data['buildings']
+        buildings_data = self.data['buildings']
         name = self.data['name']
-        for building in buildings:
-            self.player.buildings.append(building)
+        for building_data in buildings_data:
+            if isinstance(building_data, dict):
+                building = Building(
+                    name=building_data['name'],
+                    cost=building_data['cost'],
+                    nps=building_data['nps']
+                )
+                building.level = building_data.get('count', 0)
+                building.cost = building_data.get('cost', building.cost)
+                building.nps = building_data.get('nps', building.nps)
+                self.player.buildings.append(building)
+            elif isinstance(building_data, Building):
+                self.player.buildings.append(building_data)
         game = Game()
         game.player = self.player
         game.player.name = name
@@ -36,6 +48,9 @@ class LoadSave:
         filepath = self.getSavePath(filename)
         if os.path.exists(filepath):
             with open(filepath, "r") as file:
-                data = file.read()
+                data = json.load(file) 
                 return data
         return None
+    
+    def getSavePath(self, filename):
+        return os.path.join("saves", filename)

@@ -2,6 +2,7 @@ import pygame
 from components.constants import FONT
 from components.LoadData import LoadData
 from components.LoadSave import LoadSave
+from components.Button import Button
 pygame.init()
 
 class ListSaveMenu:
@@ -10,6 +11,7 @@ class ListSaveMenu:
         self.screen = screen
         self.saves = []
         self.load_saves()
+        self.buttons = []
 
 
     def load_saves(self):
@@ -19,9 +21,9 @@ class ListSaveMenu:
         self.screen.fill((0, 0, 0))
         y_offset = 100
         for save in self.saves:
-            save_text = FONT.render(save, True, (255, 255, 255))
-            save_rect = save_text.get_rect(center=(400, y_offset))
-            self.screen.blit(save_text, save_rect)
+            save_btn = Button(save, (400, y_offset), FONT)
+            save_btn.draw(self.screen)
+            self.buttons.append(save_btn)
             y_offset += 50
         pygame.display.flip()
 
@@ -36,9 +38,9 @@ class ListSaveMenu:
         if event.type == pygame.MOUSEBUTTONDOWN:
             y_offset = 100
             for save in self.saves:
-                save_rect = pygame.Rect(0, y_offset - 25, 800, 50)
-                if save_rect.collidepoint(event.pos):
-                    self.LoadGame(save)
+                for btn in self.buttons:
+                    if btn.is_hovered(event.pos) and btn.text == save:
+                        self.LoadGame(save)
                 y_offset += 50
     def run(self):
         running = True
