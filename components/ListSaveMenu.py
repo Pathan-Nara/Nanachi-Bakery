@@ -1,7 +1,7 @@
 import pygame
-from constants import FONT
-from LoadData import LoadData
-from LoadSave import LoadSave
+from components.constants import FONT
+from components.LoadData import LoadData
+from components.LoadSave import LoadSave
 pygame.init()
 
 class ListSaveMenu:

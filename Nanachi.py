@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN, BROWN
+from components.constants import SCREEN, BROWN
 pygame.init()
 
 

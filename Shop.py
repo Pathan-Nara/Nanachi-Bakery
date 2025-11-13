@@ -1,6 +1,6 @@
 import pygame
-from BuildingList import BuildingList
-from constants import SCREEN, GREEN, GRAY, BLACK, SMALL_FONT
+from components.BuildingList import BuildingList
+from components.constants import SCREEN, GREEN, GRAY, BLACK, SMALL_FONT
 pygame.init()
 
 

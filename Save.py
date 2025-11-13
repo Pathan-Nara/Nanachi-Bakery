@@ -1,6 +1,5 @@
 import json
 import os
-from random import randint
 class Save:
     def __init__ (self, filename):
         self.filename = filename

@@ -1,7 +1,7 @@
 import pygame
 from Game import Game
-from constants import FONT
-from ListSaveMenu import ListSaveMenu
+from components.constants import FONT
+from components.ListSaveMenu import ListSaveMenu
 pygame.init()
 class MainMenu:
 

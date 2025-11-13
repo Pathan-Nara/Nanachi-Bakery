@@ -1,11 +1,11 @@
 from Save import Save
-from random import randint
+import datetime
 class Player:
     def __init__(self):
         self.nanachi = 0
         self.nps = 0 
         self.buildings = []
-        self.name = randint(0, 9999)
+        self.name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     
     def add_nanachi(self, amount):
         self.nanachi += amount

@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN 
+from components.constants import SCREEN 
 pygame.init()
 from MainMenu import MainMenu
 

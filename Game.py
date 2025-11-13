@@ -2,7 +2,7 @@ import pygame
 from Player import Player
 from Nanachi import Nanachi
 from Shop import Shop
-from constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
+from components.constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
 pygame.init()
 
 
