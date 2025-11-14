@@ -25,7 +25,7 @@ Interface interactive, boutons, animations et éléments cliquables.
 Présent dans l’interface.  
 Ne doit pas être cliqué.  
 Ne doit absolument pas être cliqué sept fois.
-## à vos risques et gyatteries
+**à vos risques et gyatteries**
 
 ---
 
