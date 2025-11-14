@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-
+pygame.display.set_caption("Nanachi Bakery")
 FONT = pygame.font.SysFont('arial', 30)
 SMALL_FONT = pygame.font.SysFont('arial', 20)
 screen_resolution = pygame.display.Info()
