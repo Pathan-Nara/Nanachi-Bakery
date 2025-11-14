@@ -21,6 +21,7 @@ class Credits:
             "Poulet Whatsapp pour les idées de gameplay",
             "Le chien à Gréjon pour avoir implanté une puce 5G dans notre cerveau",
             "John Limbus pour les astie de bugs",
+            "Sinclair pour avoir permis a Jorys de parler a une VRAIE femme",
             "Cécile Basle pour nous avoir deconcentrer en cours",
             "Cyril Vimard pour nous avoir rien appris en cours",
             "Encore Jorys Pephily pour avoir sauver mon chat de la noyade, ",

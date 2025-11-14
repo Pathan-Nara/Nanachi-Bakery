@@ -3,6 +3,7 @@ from core_class.Player import Player
 from core_class.Nanachi import Nanachi
 from core_class.Shop import Shop
 from components.Button import Button
+from upgrades.MiniNana import MiniNana
 import random
 from components.constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
 pygame.init()
@@ -31,25 +32,41 @@ class Game:
                     pygame.quit()
                     exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.nanachi.is_clicked(event.pos):
-                    self.player.add_nanachi(self.player.npc)
-                    self.nanachi.randomize_image()
-                    self.nanachi.randomize_position()
-                for btn in self.buttons:
-                    if btn.is_hovered(event.pos) and btn.text == "Save and Quit":
-                        self.player.save_game()
-                        self.running = False
-                        pygame.quit()
-                        exit()
+                # Vérifier d'abord si on clique sur un Mini Nana
+                mini_nana_clicked = False
+                for upgrade in self.player.upgrades:
+                    if isinstance(upgrade, MiniNana):
+                        if upgrade.handle_click(event.pos, self.player):
+                            mini_nana_clicked = True
+                            break
+                
+                # Si pas de Mini Nana cliqué, gérer les autres clics
+                if not mini_nana_clicked:
+                    if self.nanachi.is_clicked(event.pos):
+                        self.player.add_nanachi(self.player.npc)
+                        self.nanachi.randomize_image()
+                        self.nanachi.randomize_position()
+                    
+                    for btn in self.buttons:
+                        if btn.is_hovered(event.pos) and btn.text == "Save and Quit":
+                            self.player.save_game()
+                            self.running = False
+                            pygame.quit()
+                            exit()
 
-                else:
-                    self.shop.handle_click(event.pos, self.player)
+                    else:
+                        self.shop.handle_click(event.pos, self.player)
             
 
     
     def update(self):
         dt = self.clock.tick(60) / 1000.0
         self.player.update(dt)
+        
+        # Mettre à jour les Mini Nanas
+        for upgrade in self.player.upgrades:
+            if isinstance(upgrade, MiniNana):
+                upgrade.update_nanas()
     
     def draw(self):
         SCREEN.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
@@ -76,6 +93,11 @@ class Game:
         self.buttons.append(save_btn)
 
         self.nanachi.draw()
+        
+        # Dessiner les Mini Nanas
+        for upgrade in self.player.upgrades:
+            if isinstance(upgrade, MiniNana):
+                upgrade.draw_nanas(SCREEN)
 
         pygame.display.flip()
     

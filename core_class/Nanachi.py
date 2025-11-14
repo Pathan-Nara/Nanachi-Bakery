@@ -10,11 +10,11 @@ class Nanachi:
         self.x = x
         self.y = y
         self.radius = radius
-        self.imgs = os.listdir("images")
+        self.imgs = os.listdir("images/nanachi_img")
         self.current_img = self.imgs[0]
     
     def draw(self):
-        nanachi = pygame.image.load(f"images/{self.current_img}").convert_alpha()
+        nanachi = pygame.image.load(f"images/nanachi_img/{self.current_img}").convert_alpha()
         nanachi = pygame.transform.scale(nanachi, (self.radius*2, self.radius*2))
         SCREEN.blit(nanachi, (self.x - self.radius, self.y - self.radius))
         
