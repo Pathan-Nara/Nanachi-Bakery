@@ -1,32 +1,60 @@
 # Nanachi-Bakery
 
-skibidi nanachi bakery
+## Description
+Nanachi-Bakery est un jeu clicker développé en Python avec Pygame.  
+Votre objectif est de produire des nanachis, d'améliorer votre production, de gérer vos bâtiments, et d'éviter ce bouton nommé "Do Not Click" que personne ne devrait toucher.  
+(Ne pas cliquer dessus sept fois non plus.)
 
+---
 
+## Fonctionnalités
 
-fonctionnalités:
-- Gestion des ressources
-- Améliorations et upgrades
-- Sauvegarde et chargement de la progression
-- Interface utilisateur interactive avec Pygame
-- Personnages et animations
-- Merci de ne pas cliquer sur le bouton "Do Not Click"
-        -Si vous veniez a cliquer dessus merci de ne pas cliquer 7 fois dessus
-        -Ne cliquez pas sur le bouton, à vos risques et gyatteries
+### Gestion des ressources
+Production de nanachis via le clic et via les bâtiments.
 
+### Améliorations et upgrades
+Système d'upgrades permettant d'augmenter la production ou de débloquer des interactions supplémentaires.
 
-effets : 
-   batiments : ajoute des nanachis par secondes
-   upgrades : 
-        jorysHand : ajoute des nanachi par clic
-        miniNana : ajoute une image de nanachi cliquable qui ajoute des nanachis de facon aleatoire
-        BrrBrrPatapim : augmente les nanachis par secondes du batiment Mine
+### Sauvegarde et chargement
+Gestion des sauvegardes en JSON pour conserver la progression.
 
-Technologies utilisées:
-- Python
-- Pygame pour l'interface graphique
-- JSON pour la gestion des sauvegardes
-Installation:
-1. Cloner le dépôt GitHub
-2. pip install pygame
-3. python main.py
+### Interface utilisateur Pygame
+Interface interactive, boutons, animations et éléments cliquables.
+
+### Bouton "Do Not Click"
+Présent dans l’interface.  
+Ne doit pas être cliqué.  
+Ne doit absolument pas être cliqué sept fois.
+à vos risques et gyatteries
+
+---
+
+## Effets
+
+### Bâtiments
+Génèrent automatiquement des nanachis par seconde.
+
+### Upgrades
+- **jorysHand** : augmente les nanachis gagnés par clic.  
+- **miniNana** : ajoute une image cliquable générant des nanachis aléatoirement.  
+- **BrrBrrPatapim** : augmente les nanachis par seconde du bâtiment "Mine".
+
+---
+
+## Technologies utilisées
+- Python  
+- Pygame  
+- JSON  
+
+---
+
+## Installation
+
+1. Cloner le dépôt GitHub.  
+2. Installer Pygame :  
+   ```bash
+   pip install pygame
+3. Exécuter le script principal :  
+   ```bash
+   python main.py
+   ```
