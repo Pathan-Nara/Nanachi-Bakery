@@ -32,15 +32,12 @@ class Game:
                     pygame.quit()
                     exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # Vérifier d'abord si on clique sur un Mini Nana
                 mini_nana_clicked = False
                 for upgrade in self.player.upgrades:
                     if isinstance(upgrade, MiniNana):
                         if upgrade.handle_click(event.pos, self.player):
                             mini_nana_clicked = True
                             break
-                
-                # Si pas de Mini Nana cliqué, gérer les autres clics
                 if not mini_nana_clicked:
                     if self.nanachi.is_clicked(event.pos):
                         self.player.add_nanachi(self.player.npc)
@@ -62,8 +59,6 @@ class Game:
     def update(self):
         dt = self.clock.tick(60) / 1000.0
         self.player.update(dt)
-        
-        # Mettre à jour les Mini Nanas
         for upgrade in self.player.upgrades:
             if isinstance(upgrade, MiniNana):
                 upgrade.update_nanas()
@@ -92,9 +87,7 @@ class Game:
         save_btn.draw(SCREEN)
         self.buttons.append(save_btn)
 
-        self.nanachi.draw()
-        
-        # Dessiner les Mini Nanas
+        self.nanachi.draw()        
         for upgrade in self.player.upgrades:
             if isinstance(upgrade, MiniNana):
                 upgrade.draw_nanas(SCREEN)
