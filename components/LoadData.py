@@ -12,5 +12,7 @@ class LoadData:
         return None
     
     def listSaves(self):
+        if not os.path.exists("saves"):
+            return []
         saves = os.listdir("saves")
         return saves

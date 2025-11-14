@@ -61,6 +61,9 @@ class LoadSave:
                         available_upgrade.level = upgrade_data.get('level', 0)
                         available_upgrade.base_cost = upgrade_data['base_cost']
                         available_upgrade.update_cost()
+                        if available_upgrade.name == "Mini Nana":
+                            for _ in range(upgrade_data.get('level', 0)):
+                                available_upgrade.apply_effect(self.player)
                         self.player.upgrades.append(available_upgrade)
                         break
 
