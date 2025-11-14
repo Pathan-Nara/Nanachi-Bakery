@@ -1,7 +1,7 @@
 import pygame
-from Player import Player
-from Nanachi import Nanachi
-from Shop import Shop
+from core_class.Player import Player
+from core_class.Nanachi import Nanachi
+from core_class.Shop import Shop
 from components.Button import Button
 import random
 from components.constants import SCREEN, WHITE, BLACK, FONT, SMALL_FONT
