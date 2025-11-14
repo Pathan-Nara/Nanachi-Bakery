@@ -24,6 +24,8 @@ class Credits:
             "Sinclair pour avoir permis a Jorys de parler a une VRAIE femme",
             "Cécile Basle pour nous avoir deconcentrer en cours",
             "Cyril Vimard pour nous avoir rien appris en cours",
+            "Iouri Martin pour les 500 000 abonnés",
+            "Brulez la caisse d'épargne pour avoir refusé le prêt de Johnny",
             "Encore Jorys Pephily pour avoir sauver mon chat de la noyade, ",
             "et sauvé ma mère d'une crise cardiaque et risqué sa vie pour aider ",
             "une grand mère qui se faisait agresser dans la rue (merci Jorys)",

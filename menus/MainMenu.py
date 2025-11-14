@@ -5,6 +5,7 @@ from menus.ListSaveMenu import ListSaveMenu
 from components.Button import Button
 from menus.Credits import Credits
 from components.MainMenuButton import MainMenuButton
+from menus.DoNotClick import DoNotClick
 
 pygame.init()
 
@@ -21,6 +22,8 @@ class MainMenu:
         self.save_btn = MainMenuButton("Load Game", pygame.Rect(center_x - 100, center_y, 200, 50), FONT, default_color=(0, 100, 255))
         self.credit_btn = MainMenuButton("Credits", pygame.Rect(center_x - 100, center_y + 80, 200, 50), FONT, default_color=(255, 165, 0))
         self.quit_btn = MainMenuButton("Quit", pygame.Rect(center_x - 100, center_y + 160, 200, 50), FONT, default_color=(255, 0, 0))
+        self.dont_click_btn = MainMenuButton("Do not Click", pygame.Rect(screen_w - 205, 5, 200, 50), FONT, default_color=(255, 0, 0))
+
 
     def draw(self):
         self.screen.fill((0, 0, 0))
@@ -28,6 +31,7 @@ class MainMenu:
         self.save_btn.draw_menu_button()
         self.credit_btn.draw_menu_button()
         self.quit_btn.draw_menu_button()
+        self.dont_click_btn.draw_menu_button()
         pygame.display.flip()
 
     def handle_event(self, event):
@@ -52,6 +56,9 @@ class MainMenu:
             elif self.quit_btn.is_hovered(event.pos):
                 pygame.quit()
                 exit()
+            elif self.dont_click_btn.is_hovered(event.pos):
+                donotclick = DoNotClick(self.screen)
+                donotclick.run()
 
     def run(self):
         running = True
