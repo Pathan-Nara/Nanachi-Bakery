@@ -11,8 +11,8 @@ fonctionnalités:
 - Interface utilisateur interactive avec Pygame
 - Personnages et animations
 - Merci de ne pas cliquer sur le bouton "Do Not Click"
-       -Si vous veniez a cliquer dessus merci de ne pas cliquer 7 fois dessus
-       -Ne cliquez pas sur le bouton, à vos risque et périls
+        -Si vous veniez a cliquer dessus merci de ne pas cliquer 7 fois dessus
+        -Ne cliquez pas sur le bouton, à vos risques et gyatteries
 
 
 effets : 
